@@ -1,0 +1,21 @@
+{%- extends "layout.html" -%}
+{%- from "_helpers.html" import render_field -%}
+
+{%- block content -%}
+<div class="grid">
+    <div class="unit whole">
+        <div class="box box-primary" style="max-width: 300px; margin:0 auto">
+            <form class="form with-border" method="POST">
+                {{- form.hidden_tag() -}}
+                {{render_field(form.username)}}
+                {{render_field(form.password)}}
+                <div class="form-field">
+                    {{form.remember_me.label(class="field-label")}}
+                    {{form.remember_me()}}
+                </div>
+                <input type="submit" value="Log In" class="btn btn-primary pull-right">
+            </form>
+        </div>
+    </div>
+</div>
+{%- endblock -%}

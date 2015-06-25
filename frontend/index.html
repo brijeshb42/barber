@@ -1,0 +1,42 @@
+{%- extends "layout.html" -%}
+
+{%- block scripthead -%}
+{%- if sizes is defined and sizes|length > 0 -%}
+<script type="text/javascript">
+    var SIZES = {};
+    {%- for size in sizes -%}
+    SIZES["{{size.name}}"] = [{{size.width}}, {{size.height}}];
+    {%- endfor -%}
+</script>
+{%- endif -%}
+{%- endblock -%}
+
+{%- block content -%}
+<div id="container" class="unit whole">
+    <div class="input-container">
+        <input id="url-input" type="text" placeholder="Enter image URL" autofocus>
+        <h4>OR</h4>
+        <div class="dropper">
+            <h3>Drop your image here OR select from your hard drive.</h3>
+            <input id="file-input" type="file" placeholder="Select image from computer">
+        </div>
+    </div>
+    <div id="main-block">
+        <div class="btn-group controls">
+            <div class="dynamic-actions">
+                <button class="btn">Thumbnail</button>
+                <button class="btn">FB</button>
+                <button class="btn">Banner</button>
+            </div>
+        </div>
+        <div class="img-holder">
+        </div>
+        <div id="submitter" style="text-align: center; display:none">
+            <div class="final-form">
+            </div>
+            <button class="btn btn-large btn-primary" id="finalSave">Save</button>
+        </div>
+        <div class="output"></div>
+    </div>
+</div>
+{%- endblock -%}

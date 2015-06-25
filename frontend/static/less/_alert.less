@@ -1,0 +1,30 @@
+@import "_vars";
+
+.message, .alert {
+
+    background-color: @color-primary;
+    border-left: 4px solid darken(@color-primary, 10%);
+    color: #fff;
+    font-size: 1.2em;
+    padding: 10px;
+    margin-bottom: 2px;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    &.info {
+        background-color: @color-info;
+        border-left: 4px solid darken(@color-info, 10%);
+    }
+    &.danger {
+        background-color: @color-danger;
+        border-left: 4px solid darken(@color-danger, 10%);
+    }
+    &.warning {
+        background-color: @color-warning;
+        border-left: 4px solid darken(@color-warning, 10%);
+    }
+
+}

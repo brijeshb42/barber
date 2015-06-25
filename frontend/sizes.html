@@ -1,0 +1,18 @@
+{%- extends "layout.html" -%}
+{%- from "_helpers.html" import render_field -%}
+
+{%- block content -%}
+<div class="grid">
+    <div class="unit whole">
+        <div class="box box-primary" style="max-width: 300px; margin:0 auto">
+            <form class="form with-border" method="POST">
+                {{- form.hidden_tag() -}}
+                {{render_field(form.name)}}
+                {{render_field(form.width)}}
+                {{render_field(form.height)}}
+                <input type="submit" value="Save" class="btn btn-primary pull-right">
+            </form>
+        </div>
+    </div>
+</div>
+{%- endblock -%}
