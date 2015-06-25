@@ -34,12 +34,12 @@
 <nav class="nav from-start">
     <a class="brand" href="/">Starter Kit</a>
     <ul class="pull-left">
-        <li><a href="/" {% if request.path == url_for('index') -%} class="link-active"{%- endif -%}>Home</a></li>
+        <li><a href="/" class="{% if request.path == url_for('index') -%}link-active{%- endif -%}">Home</a></li>
         {%- if current_user.is_authenticated() -%}
-        <li><a href="{{url_for('sizes')}}" {% if request.path == url_for('sizes') -%} class="link-active"{%- endif -%}>Sizes</a></li>
+        <li><a href="{{url_for('sizes')}}" class="{% if request.path == url_for('sizes') -%}link-active{%- endif -%}">Sizes</a></li>
         <li><a href="{{url_for('logout')}}">Logout</a></li>
         {%- else -%}
-        <li><a href="{{url_for('login')}}" {% if request.path == url_for('login') -%} class="link-active"{%- endif -%}>Login</a></li>
+        <li><a href="{{url_for('login')}}" class="{% if request.path == url_for('login') -%}link-active{%- endif -%}">Login</a></li>
         {%- endif -%}
     </ul>
 </nav>
