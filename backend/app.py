@@ -143,7 +143,7 @@ def sizes():
     form = SizeForm()
     if form.validate_on_submit():
         img = ImageSize(
-            name=form.name.data,
+            name=form.name.data.lower(),
             width=form.width.data,
             height=form.height.data
         )
@@ -155,7 +155,48 @@ def sizes():
         return redirect(url_for("index"))
     return render_template(
         "sizes.html",
-        form=form)
+        form=form,
+        sizes=ImageSize.all())
+
+
+@app.route("/sizes/edit/<int:sid>", methods=["GET", "POST"])
+@login_required
+def sizes_edit(sid):
+    img = ImageSize.query.get(sid)
+    if not img:
+        flash("Invalid size.", "error")
+        return redirect(url_for("sizes"))
+    form = SizeForm()
+    form.name.data = img.name
+    form.width.data = img.width
+    form.height.data = img.height
+    if form.validate_on_submit():
+        img.width = form.width.data
+        img.height = form.height.data
+        db.session.add(img)
+        db.session.commit()
+        cache.clear()
+        flash("%s updated with %d width and %d height." % (
+            img.name, img.width, img.height), "info")
+        return redirect(url_for("sizes"))
+    return render_template(
+        "sizes.html",
+        form=form,
+        title="Edit %s" % img.name)
+
+
+@app.route("/sizes/delete/<int:sid>", methods=["POST"])
+@login_required
+def sizes_delete(sid):
+    sz = ImageSize.query.get(sid)
+    if not sz:
+        flash("Invalid size.", "error")
+        return redirect(url_for("sizes"))
+    db.session.delete(sz)
+    db.session.commit()
+    cache.clear()
+    flash("%s deleted." % sz.name, "success")
+    return redirect(url_for("sizes"))
 
 
 @app.route("/login", methods=["GET", "POST"])

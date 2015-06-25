@@ -119,3 +119,4 @@ config.py
 templates/
 frontend/static/css/
 *.db
+images/

@@ -6,6 +6,10 @@
     <div class="unit whole">
         <div class="box box-primary" style="max-width: 300px; margin:0 auto">
             <form class="form with-border" method="POST">
+                {%- if title is defined -%}
+                <span>Name will not be updated</span>
+                <h2>{{title}}</h3>
+                {%- endif -%}
                 {{- form.hidden_tag() -}}
                 {{render_field(form.name)}}
                 {{render_field(form.width)}}
@@ -15,4 +19,35 @@
         </div>
     </div>
 </div>
+{%- if sizes and sizes|length > 0 -%}
+<div class="grid">
+    <div class="unit whole">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%- for size in sizes -%}
+            <tr>
+                <td class="img-size-name">{{size.name}}</td>
+                <td>{{size.width}}</td>
+                <td>{{size.height}}</td>
+                <td>
+                    <form method="POST" action="{{url_for('sizes_delete', sid=size.id)}}" style="display:inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <a href="{{url_for('sizes_edit', sid=size.id)}}" class="btn btn-primary">Edit</button>
+                </td>
+            </tr>
+            {%- endfor -%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endif -%}
 {%- endblock -%}

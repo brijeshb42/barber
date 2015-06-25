@@ -76,11 +76,6 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
 
                 client.on('ready', function(event) {
                     console.log("Client ready");
-                    /*client.on( 'copy', function(event) {
-                        console.log(event);
-                        event.target.innerHTML == "Copied";
-                        //event.clipboardData.setData('text/plain', event.target.innerHTML);
-                    });*/
 
                     client.on('aftercopy', function(event) {
                         console.log(event);
@@ -200,12 +195,12 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         $buttons.html('');
         $preview.html('');
         if(window.SIZES) {
-            var $btn = $("<button />").html("Free").addClass("btn btn-danger");
+            var $btn = $("<button />").html("Free").addClass("btn btn-danger img-size-name");
             var listener = getListener("free");
             $btn.on("click", listener);
             $buttons.append($btn);
             for(s in SIZES) {
-                var $btn = $("<button />").html(s).addClass("btn btn-danger");
+                var $btn = $("<button />").html(s).addClass("btn btn-danger img-size-name");
                 var listener = getListener(s, SIZES[s][0], SIZES[s][1]);
                 $btn.on("click", listener);
                 $buttons.append($btn);
