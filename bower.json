@@ -19,7 +19,8 @@
     "caman": "~4.1.2",
     "cropper": "~0.10.0",
     "jcrop": "~0.9.12",
-    "medium-style-confirm": "~0.4.2"
+    "medium-style-confirm": "~0.4.2",
+    "zeroclipboard": "~2.2.0"
   },
   "description": "Flask starter-kit",
   "keywords": [
