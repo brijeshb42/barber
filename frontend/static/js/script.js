@@ -16,6 +16,11 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         $preview        = $(".preview-container"),
         $dropper        = $(".dropper"),
         $finalForm      = $(".final-form"),
+        $imgWidth       = $("#imgWidth"),
+        $imgHeight      = $("#imgHeight"),
+        $freeImg        = $(".free-img"),
+        $freeWidth      = $("#free-width"),
+        $freeHeight      = $("#free-height"),
         imager, $imager, jCrop;
 
     var urlRegExp =/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
@@ -146,6 +151,8 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
                                 origWidth: data.w * imager.naturalWidth / $imager.width(),
                                 origHeight: data.h * imager.naturalHeight / $imager.height()
                             };
+                            $imgWidth.html("Width: " + Math.round(data.w * imager.naturalWidth / $imager.width()));
+                            $imgHeight.html("Height: " + Math.round(data.h * imager.naturalHeight / $imager.height()));
                             generatePreview();
                         },
                         setSelect: [0, 0, 50, 50]
@@ -165,6 +172,8 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
                             origWidth: width,
                             origHeight: height
                         };
+                        $imgWidth.html("Width: " + Math.round(data.w * imager.naturalWidth / $imager.width()));
+                        $imgHeight.html("Height: " + Math.round(data.h * imager.naturalHeight / $imager.height()));
                         generatePreview();
                     },
                     //minSize: minsize,
@@ -187,6 +196,7 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         currentInfo = {};
         $inputContainer.show();
         winClosing = "";
+        $freeImg.hide();
     }
     
     function imgOnLoad(e) {
@@ -209,6 +219,7 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         }
         $(".controls").show();
         $inputContainer.hide();
+        $freeImg.show()
     }
 
     $fileInput.on("change", function(e) {
