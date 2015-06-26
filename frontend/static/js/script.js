@@ -266,7 +266,7 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
 
     $urlInput.on("keydown", loadFromUrl);
 
-    if($urlInput.val() !== "") {
+    if($urlInput.val() !== "" && location.pathname == "/") {
         loadFromUrl();
     }
 
