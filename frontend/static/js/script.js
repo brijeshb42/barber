@@ -116,6 +116,7 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
                 img.origWidth,
                 img.origHeight
             );
+            $preview.append("<span><b>"+name+"</b></span>");
             $preview.append(canvas);
             var $formField = "<span><label>"+name+"</label>" + "<input type=checkbox checked=true data-img-name='"+name+"' /></span>";
             $finalForm.append($formField);
@@ -245,8 +246,8 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         $imager = $(imager);
     }
 
-    $urlInput.on("keydown", function(e) {
-        if(e.which !== 13) {
+    function loadFromUrl(e) {
+        if(e && e.which !== 13) {
             return;
         }
         if(!urlRegExp.test($urlInput.val())) {
@@ -261,7 +262,13 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         };
         imager.src = $urlInput.val();
         $imager = $(imager);
-    });
+    }
+
+    $urlInput.on("keydown", loadFromUrl);
+
+    if($urlInput.val() !== "") {
+        loadFromUrl();
+    }
 
     /*$dropper.on("click", function(e) {
         e.stopPropagation();

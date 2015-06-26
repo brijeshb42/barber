@@ -133,8 +133,11 @@ def get_random_part(length):
 @app.route("/")
 @login_required
 def index():
+    url = request.args.get("url","")
     return render_template(
-        "index.html", sizes=ImageSize.all())
+        "index.html",
+        sizes=ImageSize.all(),
+        url=url)
 
 
 @app.route("/sizes", methods=["GET", "POST"])

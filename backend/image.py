@@ -54,7 +54,7 @@ def construct_image_file_name(url):
     return file_ext
 
 
-def crop_image(image, size, name, extension):
+def crop_image(image, size, name, extension, url):
     x1 = int(round(size["x"]))
     y1 = int(round(size["y"]))
     x2 = int(round(size["x"]+size["width"]))
@@ -72,22 +72,22 @@ def crop_image(image, size, name, extension):
         format = "PNG"
     else:
         format = None
-    region.save(os.path.join(
-        IMG_DIR_ABS, name
-        ),
+    file_path = os.path.join(IMG_DIR_ABS, name)
+    region.save(
+        file_path,
         format=format,
         quality=90,
         optimize=True
     )
 
 
-def save_image(content, extension, sizes):
+def save_image(content, extension, sizes, url):
     img = Image.open(
         StringIO(content))
     res = {}
     suffix = "-"+get_random_part()+"."+extension
     for key in sizes:
-        crop_image(img, sizes[key], key+suffix, extension)
+        crop_image(img, sizes[key], key+suffix, extension, url)
         res[key] = Settings.HOSTNAME + "/images/"+key+suffix
     return res
 
@@ -99,11 +99,11 @@ def download_from_url(url, sizes):
             return False, "Invalid file format."
         extension = mtch.groups()[0]
         return True, save_image(
-            decodestring(url.split(",")[1]), extension, sizes)
+            decodestring(url.split(",")[1]), extension, sizes, None)
     if URL_REGEX.match(url):
         extension = construct_image_file_name(url)
         img = requests.get(url)
         if img.status_code != 200:
             return False, "Not a valid image."
-        return True, save_image(img.content, extension[1:], sizes)
+        return True, save_image(img.content, extension[1:], sizes, url)
     return False, "Not a valid URL."
