@@ -1,10 +1,9 @@
 /*
-* @author: Brijesh Bittu<brijeshb42@gmail.com> for Scroll Media Inc.
+* @author: Brijesh Bittu<brijeshb42@gmail.com>
 */
 
 ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
-//ZeroClipboard.create()
-//$(document).ready(function() {
+$(document).ready(function() {
 
 
     var $urlInput       = $("#url-input"),
@@ -143,13 +142,23 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
                 if(name === "free") {
                     $imager.Jcrop({
                         onSelect: function(data) {
+                            if($freeWidth.val() !== "" && /^[0-9]*$/.test($freeWidth.val())) {
+                                width = parseInt($freeWidth.val());
+                                height = data.h / data.w * width;
+                                $freeHeight.val(Math.round(height));
+                            } else {
+                                $freeWidth.val("");
+                                $freeHeight.val("");
+                                width = data.w * imager.naturalWidth / $imager.width();
+                                height = data.h * imager.naturalHeight / $imager.height();
+                            }
                             currentInfo[name.toLowerCase()] = {
                                 x: data.x * imager.naturalWidth / $imager.width(),
                                 y: data.y * imager.naturalHeight / $imager.height(),
                                 width: data.w * imager.naturalWidth / $imager.width(),
                                 height: data.h * imager.naturalHeight / $imager.height(),
-                                origWidth: data.w * imager.naturalWidth / $imager.width(),
-                                origHeight: data.h * imager.naturalHeight / $imager.height()
+                                origWidth: width,
+                                origHeight: height
                             };
                             $imgWidth.html("Width: " + Math.round(data.w * imager.naturalWidth / $imager.width()));
                             $imgHeight.html("Height: " + Math.round(data.h * imager.naturalHeight / $imager.height()));
@@ -161,6 +170,8 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
                     });
                     return;
                 }
+                $freeWidth.val("");
+                $freeHeight.val("");
                 $imager.Jcrop({
                     aspectRatio: width/height,
                     onSelect: function(data) {
@@ -344,8 +355,10 @@ ZeroClipboard.config( { swfPath: "/static/js/ZeroClipboard.swf" } );
         }
     });
 
+    //$freeWidth.on("input", generatePreview);
+
     window.onbeforeunload = confirmExit;
     function confirmExit() {
         return winClosing;
     }
-//});
+});

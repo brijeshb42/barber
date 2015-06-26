@@ -140,6 +140,12 @@ def index():
         url=url)
 
 
+@app.route("/faq")
+@login_required
+def faq():
+    return render_template("faq.html")
+
+
 @app.route("/sizes", methods=["GET", "POST"])
 @login_required
 def sizes():

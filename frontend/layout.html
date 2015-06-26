@@ -37,11 +37,16 @@
         <li><a href="/" class="{% if request.path == url_for('index') -%}link-active{%- endif -%}">Home</a></li>
         {%- if current_user.is_authenticated() -%}
         <li><a href="{{url_for('sizes')}}" class="{% if request.path == url_for('sizes') -%}link-active{%- endif -%}">Sizes</a></li>
-        <li><a href="{{url_for('logout')}}">Logout</a></li>
         {%- else -%}
         <li><a href="{{url_for('login')}}" class="{% if request.path == url_for('login') -%}link-active{%- endif -%}">Login</a></li>
         {%- endif -%}
     </ul>
+    {%- if current_user.is_authenticated() -%}
+    <ul class="pull-right">
+        <li><a href="{{url_for('faq')}}" class="{% if request.path == url_for('faq') -%}link-active{%- endif -%}">How To</a></li>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+    </ul>
+    {%- endif -%}
 </nav>
 <div class="wrap grid">
 {%- block header -%}

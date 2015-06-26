@@ -38,7 +38,7 @@ gulp.task("copy-img", function() {
 });
 
 gulp.task("copy-swf", function() {
-    return gulp.src(src.js+"*.swf")
+    return gulp.src("bower_components/zeroclipboard/dist/ZeroClipboard.swf")
         .pipe(gulp.dest(dest.js));
 });
 

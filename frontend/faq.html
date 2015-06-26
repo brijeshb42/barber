@@ -1,0 +1,35 @@
+{%- extends "layout.html" -%}
+
+{%- block content -%}
+<div id="container" class="unit half">
+    <h2>Initialization</h2>
+    <ul>
+        <li>Define a few image sizes from the <b><a href="{{url_for('sizes')}}">Sizes</a></b> link if there aren't any.</li>
+        <li>The name of the size is very important. It is used when naming images after uploading. Do not include any other character except alphabets in the name.</li>
+        <li>Provide a valid Width and Height.</li>
+        <li>These are used to maintain the aspect ratio of the selected image area while cropping.</li>
+    </ul>
+    <h2>Selecting desired image</h2>
+    <ul>
+        <li>If you have the image URL, paste it into the input box and press enter.</li>
+        <li>OR, drop the image from your file explorer of PC onto the designated area.</li>
+        <li>OR, browse your PC for image by clicking the <b>Choose file</b> button.</li>
+    </ul>
+</div>
+<div class="unit half">
+    <h2>Free size</h2>
+    <ul>
+        <li>Free size button allows you to select your desired region of image without any restriction on aspect ratio.</li>
+        <li>For ex, to just upload an image from anywhere to our own server, just input the image image URL, click on <b>Free</b> button and resize the crop area to fit the entire image and then click <b>Save</b>.</li>
+        <li>If you want the free size selection to resize to a particular width, just enter the desired width into the <b>Resize Width</b> input. Height is automatically calculated based on the aspect ratio of the selected area.</li>
+    </ul>
+    <h2>After selecting image</h2>
+    <ul>
+        <li>When you click on a predefined size button, the crop area appears. Move it around or resize the area to get your desired region of image.</li>
+        <li>Select other size regions.</li>
+        <li>After completing the selection, confirm the sizes you want to save by checking the relevant boxes.</li>
+        <li>Now click on <b>Save</b> and wait. Image manipulation is a time taking operation.</li>
+        <li>Once the resizing is done, press <b>OK</b>. The relevant image URLs will be displayed which can be copied by clicking the <b>Copy</b> button.</li>
+    </ul>
+</div>
+{%- endblock -%}
