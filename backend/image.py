@@ -11,16 +11,9 @@ from cStringIO import StringIO
 from PIL import Image
 import requests
 
+from .s3 import upload_file_to_s3
 from config import Settings
 
-
-IMG_DIR = "images"
-IMG_DIR_ABS = os.path.join(
-    os.path.dirname(
-        os.path.dirname(os.path.realpath(__file__)),
-    ),
-    IMG_DIR
-)
 
 DATA_URI_EXT = "^data:image\/(png|jpeg|jpg|jpe|gif|webp);base64,.*$"
 URL_REGEX = regex = re.compile(
@@ -54,7 +47,7 @@ def construct_image_file_name(url):
     return file_ext
 
 
-def crop_image(image, size, name, extension, url):
+def crop_image(image, size, file_name, extension, url):
     x1 = int(round(size["x"]))
     y1 = int(round(size["y"]))
     x2 = int(round(size["x"]+size["width"]))
@@ -72,13 +65,22 @@ def crop_image(image, size, name, extension, url):
         format = "PNG"
     else:
         format = None
-    file_path = os.path.join(IMG_DIR_ABS, name)
+    # file_path = os.path.join(IMG_DIR_ABS, name)
+    file_buffer = StringIO()
     region.save(
-        file_path,
+        file_buffer,
         format=format,
         quality=90,
         optimize=True
     )
+    if not url:
+        upload_file_to_s3(file_buffer, file_name, extension)
+        return
+    if Settings.S3_BUCKET_MACHINE in url:
+        upload_file_to_s3(
+            file_buffer, file_name, extension, bucket=Settings.S3_BUCKET_MACHINE)
+    else:
+        upload_file_to_s3(file_buffer, file_name, extension)
 
 
 def save_image(content, extension, sizes, url):
@@ -88,7 +90,16 @@ def save_image(content, extension, sizes, url):
     suffix = "-"+get_random_part()+"."+extension
     for key in sizes:
         crop_image(img, sizes[key], key+suffix, extension, url)
-        res[key] = Settings.HOSTNAME + "/images/"+key+suffix
+        if not Settings.UPLOAD_2_S3:
+            res[key] = Settings.HOSTNAME + "/images/"+key+suffix
+        else:
+            if not url or Settings.S3_BUCKET_MACHINE not in url:
+                if Settings.CLOUDFRONT_ENABLED:
+                    res[key] = "http://%s/%s" % (Settings.CLOUDFRONT_BASE_MAIN, key+suffix)
+                else:
+                    res[key] = "http://%s.s3.amazonaws.com/%s" % (Settings.S3_BUCKET_MAIN, key+suffix)
+            else:
+                res[key] = "http://%s.s3.amazonaws.com/images/%s" % (Settings.S3_BUCKET_MACHINE, key+suffix)
     return res
 
 

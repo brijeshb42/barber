@@ -30,6 +30,7 @@ $(document).ready(function() {
 
     var idCounter = 1;
     function urlTemplate(typ, url) {
+        console.log("urltmpl");
         var id = "copy-text-"+idCounter++;
         var $div = $("<div></div>");
         $div.addClass("form-field");
@@ -70,11 +71,15 @@ $(document).ready(function() {
                 $("#submitter").hide();
                 $preview.html('');
                 var imgs = data["message"];
+                console.log(data);
                 for(var key in imgs) {
-                    if(imgs[key].indexOf("images/") > -1) {
-                        $output.append(urlTemplate(key, imgs[key]));
-                    }
+                    console.log("in "+key);
+                    $output.append(urlTemplate(key, imgs[key]));
+                    //if(imgs[key].indexOf("images/") > -1) {
+                    //    console.log(urlTemplate(key, imgs[key]));
+                    //}
                 }
+                $output.show();
                 client = null;
                 client = new ZeroClipboard($(".copy-btn"));
 

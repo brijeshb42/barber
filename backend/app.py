@@ -22,7 +22,8 @@ from wtforms.validators import DataRequired, Regexp
 
 from config import config
 
-from .image import download_from_url, IMG_DIR_ABS
+from .image import download_from_url
+from .s3 import IMG_DIR_ABS
 
 __version__ = "0.1.0"
 __author__ = "Brijesh Bittu <brijeshb42@gmail.com>"

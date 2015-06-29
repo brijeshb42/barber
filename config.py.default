@@ -7,8 +7,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    APP_NAME = 'Starter Kit'
-    APP_DESC = 'Basic Flask App starter kit.'
+    APP_NAME = 'Barber v2'
+    APP_DESC = 'Manipulate images like a barber.'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'somethingsecret'
     REMEMBER_COOKIE_NAME = 'starter-kit-app'
     CACHE_KEY_PREFIX = 'starter'
@@ -50,19 +50,19 @@ config = {
 class Settings:
     MAIL_HOST = 'smtp.mandrillapp.com'
     MAIL_PORT = 587
-    MAIL_TO = ['user@gmail.com']
-    MAIL_FROM = 'admin@gmail.com'
+    MAIL_TO = ['brijesh@scroll.in']
+    MAIL_FROM = 'bugs@scroll.in'
     MAIL_USERNAME = 'auth@gmail.com'
     MAIL_PASSWORD = 'MailPassword-JxxQ'
     SQLALCHEMY_DATABASE_URI = config["default"].SQLALCHEMY_DATABASE_URI
 
     UPLOAD_2_S3 = False
 
-    S3_ACCESS_KEY = "dfsdfsfsdfsfsdf"
-    S3_SECRET = "sdfsdfsdfsfsfs"
-    S3_BUCKET_MAIN = "sdfsdf-img-sdf"
-    S3_BUCKET_SOCIALWIRE = "sdfsdf-sdf"
+    S3_ACCESS_KEY = "sdfsdfsdf"
+    S3_SECRET = "sdfsfsdfsdfsdf"
+    S3_BUCKET_MAIN = "sdfs-img-sfsdf"
+    S3_BUCKET_MACHINE = "sdf-sdf"
 
-    CLOUDFRONT_ENABLED = True
+    CLOUDFRONT_ENABLED = False
     CLOUDFRONT_BASE_MAIN = "sdfsdf.cloudfront.net"
     HOSTNAME = "http://localhost:5000"
