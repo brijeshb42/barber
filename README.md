@@ -23,3 +23,9 @@
 * In separate terminal, `cd` into the `starter-kit` directory and run `gulp clean && gulp` to compile static assets and start a livereload server.
 * Then run `python script.py runserver`
 * Open `localhost:5000` in browser.
+* Make sure to disable S3 uploads in `config.py` if you just want to save the images locally.
+* If you have S3 enable, update these in `config.py` with relevant values:
+    UPLOAD_2_S3 = True
+    S3_ACCESS_KEY = "s3-access-key"
+    S3_SECRET = "s3-secret"
+    S3_BUCKET_MAIN = "main-bucket"
