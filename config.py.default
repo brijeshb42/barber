@@ -50,8 +50,8 @@ config = {
 class Settings:
     MAIL_HOST = 'smtp.mandrillapp.com'
     MAIL_PORT = 587
-    MAIL_TO = ['brijesh@scroll.in']
-    MAIL_FROM = 'bugs@scroll.in'
+    MAIL_TO = ['dfdf@dfdf.in']
+    MAIL_FROM = 'bugs@dfdf.in'
     MAIL_USERNAME = 'auth@gmail.com'
     MAIL_PASSWORD = 'MailPassword-JxxQ'
     SQLALCHEMY_DATABASE_URI = config["default"].SQLALCHEMY_DATABASE_URI
@@ -65,4 +65,4 @@ class Settings:
 
     CLOUDFRONT_ENABLED = False
     CLOUDFRONT_BASE_MAIN = "sdfsdf.cloudfront.net"
-    HOSTNAME = "http://localhost:5000"
+    HOSTNAME = "http://example.com"
