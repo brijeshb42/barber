@@ -7,8 +7,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    APP_NAME = 'Barber v2'
-    APP_DESC = 'Manipulate images like a barber.'
+    APP_NAME = 'iMap'
+    APP_DESC = 'Image manipulation tool'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'somethingsecret'
     REMEMBER_COOKIE_NAME = 'starter-kit-app'
     CACHE_KEY_PREFIX = 'starter'
