@@ -20,9 +20,14 @@
     * `python script.py db init`
     * `python script.py db migrate`
     * `python script.py db upgrade`
+* Create a user to login to the web interface. User signup UI is not available. So it will have to be created using python shell:
+    * `python script.py shell`
+    * `u = AuthUser(username='user', password='pass')`
+    * `db.session.add(u)`
+    * `db.session.commit()`
 * In separate terminal, `cd` into the `starter-kit` directory and run `gulp clean && gulp` to compile static assets and start a livereload server.
 * Then run `python script.py runserver`
-* Open `localhost:5000` in browser.
+* Open `localhost:5000` in browser and login using the created user.
 * Make sure to disable S3 uploads in `config.py` if you just want to save the images locally.
 * If you have S3 enable, update these in `config.py` with relevant values:
     
