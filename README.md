@@ -1,4 +1,5 @@
-# iMap - Image manipulation tool (extended from [Flask Starter Kit](https://github.com/brijeshb42/flask-web-starter-kit))
+# iMap - Image manipulation tool
+#### Extended from [Flask Starter Kit](https://github.com/brijeshb42/flask-web-starter-kit)
 
 ### Comes with preconfigured basic Flask app with SQLAlchmemy, LoginForm, Basic User Model, and static assets.
 
