@@ -89,12 +89,18 @@ $(document).ready(function() {
         $preview.html('');
         var imgs = data["message"];
         console.log(data);
+
         for(var key in imgs) {
-            console.log("in "+key);
+            if(key.toLowerCase() === "carousel") {
+                continue;
+            }
             $output.append(urlTemplate(key, imgs[key]));
             //if(imgs[key].indexOf("images/") > -1) {
             //    console.log(urlTemplate(key, imgs[key]));
             //}
+        }
+        if(imgs.carousel) {
+            $output.append(urlTemplate('carousel', imgs['carousel']));
         }
         $output.show();
         client = null;
