@@ -1,16 +1,14 @@
 # iMap - Image manipulation tool
 #### Extended from [Flask Starter Kit](https://github.com/brijeshb42/flask-web-starter-kit)
 
-### Comes with preconfigured basic Flask app with SQLAlchmemy, LoginForm, Basic User Model, and static assets.
-
 ### Requirements:
 * Python 2.7.x
 * `node` with global installation of `gulp` and `bower`. Can be used without that global installations also.
 
 ### How to use ?
-* Clone this repo `git clone git@github.com:brijeshb42/flask-web-starter-kit.git`.
-* Create a new virtual environment `mkvirtualenv starter-kit`.
-* Switch to the new env `workon starter-kit`.
+* Clone this repo.
+* Create a new virtual environment `mkvirtualenv imap`.
+* Switch to the new env `workon imap`.
 * Install python modules `pip install -r requirements.txt`.
 * Install node modules to compile assets `npm install`.
 * Install bower packages `bower install`.
@@ -36,3 +34,8 @@
     * S3_ACCESS_KEY = "s3-access-key"
     * S3_SECRET = "s3-secret"
     * S3_BUCKET_MAIN = "main-bucket"
+* For production environment, run `gulp prod` instead of only `gulp`.
+* Theres a `Procfile` if you dont want to run `gunicorn` directly.
+    * Just install `foreman`: `gem install foreman`
+    * Activate virtualenv: `workon imap`.
+    * Run `foreman start`.

@@ -134,10 +134,15 @@ def get_random_part(length):
 @app.route("/")
 @login_required
 def index():
-    url = request.args.get("url","")
+    url = request.args.get("url", "")
+    imgs = ImageSize.all()
+    for img in imgs:
+        if img.name.lower() == "thumbnail" and current_user.username == "admin":
+            img.name = "feed"
+            break;
     return render_template(
         "index.html",
-        sizes=ImageSize.all(),
+        sizes=imgs,
         url=url)
 
 
